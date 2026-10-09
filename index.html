@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案｜Shopify制作 × TikTok Shop連携</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep:#1F4B3F;
+    --green-darker:#153530;
+    --mustard:#E8A33D;
+    --pink:#D9527A;
+    --bg:#EEF1E6;
+    --paper:#FBF9F2;
+    --ink:#1A2B22;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.label-font{
+    font-family:'Shippori Antique B1','Noto Sans JP',sans-serif;
+  }
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  a{color:inherit;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 34px),
+      linear-gradient(170deg, var(--green-deep) 0%, var(--green-darker) 65%, #0e241f 100%);
+    color:#F6F3E6;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    padding:80px 0 60px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    right:-120px;
+    top:-120px;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--mustard), #c77d1f 70%);
+    opacity:.9;
+    filter:blur(.3px);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:-100px;
+    bottom:-140px;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    border:2px dashed rgba(246,243,230,0.25);
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:50px;
+  }
+  .hero-text{flex:1 1 420px;}
+  .kairos-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:.12em;
+    background:rgba(246,243,230,0.1);
+    border:1px solid rgba(246,243,230,0.35);
+    padding:7px 16px;
+    border-radius:999px;
+    margin-bottom:28px;
+  }
+  .kairos-tag::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--mustard);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(34px,5.2vw,58px);
+    line-height:1.4;
+    font-weight:400;
+    margin-bottom:22px;
+  }
+  .hero h1 span{
+    color:var(--mustard);
+  }
+  .hero p.lead{
+    font-size:16px;
+    color:#D9E3DA;
+    max-width:460px;
+    margin-bottom:30px;
+  }
+  .hero-meta{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:#BFD0C3;
+  }
+  .hero-meta div{
+    border-left:2px solid var(--mustard);
+    padding-left:12px;
+  }
+  .hero-meta b{
+    display:block;
+    font-size:18px;
+    color:#F6F3E6;
+    font-family:'Shippori Antique B1',sans-serif;
+  }
+
+  /* label badge */
+  .badge-area{
+    flex:0 0 260px;
+    display:flex;
+    justify-content:center;
+  }
+  .label-badge{
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--green-darker);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border:3px solid var(--mustard);
+    box-shadow:0 0 0 8px rgba(246,243,230,0.06), 0 25px 50px rgba(0,0,0,0.35);
+    position:relative;
+    transform:rotate(-6deg);
+  }
+  .label-badge::before{
+    content:"";
+    position:absolute;
+    inset:12px;
+    border:1px dashed rgba(31,75,63,0.35);
+    border-radius:50%;
+  }
+  .label-badge small{
+    letter-spacing:.2em;
+    font-size:11px;
+    color:#6a7a6c;
+  }
+  .label-badge .num{
+    font-family:'Shippori Antique B1',sans-serif;
+    font-size:44px;
+    color:var(--pink);
+    line-height:1;
+    margin:6px 0;
+  }
+  .label-badge .cap{
+    font-size:13px;
+    font-weight:700;
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section{
+    padding:90px 0;
+  }
+  .section-tag{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:.18em;
+    color:var(--pink);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .section-title{
+    font-size:clamp(24px,3.4vw,34px);
+    font-weight:400;
+    margin-bottom:20px;
+    color:var(--green-darker);
+  }
+
+  /* ===== UNDERSTANDING ===== */
+  .understand{
+    background:var(--paper);
+    position:relative;
+  }
+  .understand::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--mustard) 0 20px, var(--pink) 20px 40px);
+  }
+  .understand-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:48px;
+    align-items:start;
+  }
+  .quote-box{
+    background:var(--green-deep);
+    color:#F2EEDD;
+    border-radius:14px;
+    padding:36px 32px;
+    font-size:17px;
+    position:relative;
+  }
+  .quote-box::before{
+    content:"“";
+    font-family:'Shippori Antique B1',serif;
+    font-size:80px;
+    color:var(--mustard);
+    position:absolute;
+    top:-10px;
+    left:18px;
+    line-height:1;
+  }
+  .quote-box p{
+    position:relative;
+    z-index:1;
+    padding-top:18px;
+  }
+  .points{
+    list-style:none;
+  }
+  .points li{
+    display:flex;
+    gap:14px;
+    margin-bottom:18px;
+    font-size:15px;
+  }
+  .points li::before{
+    content:"・";
+    color:var(--mustard);
+    font-weight:900;
+    font-size:20px;
+  }
+
+  /* ===== VALUE CARDS ===== */
+  .value{
+    background:var(--bg);
+  }
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:26px;
+    margin-top:40px;
+  }
+  .vcard{
+    background:var(--paper);
+    border-radius:16px;
+    padding:30px 28px;
+    border:1px solid rgba(31,75,63,0.12);
+    position:relative;
+    overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .vcard:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 34px rgba(31,75,63,0.14);
+  }
+  .vcard .vnum{
+    font-family:'Shippori Antique B1',sans-serif;
+    font-size:42px;
+    color:rgba(31,75,63,0.15);
+    position:absolute;
+    top:10px;
+    right:20px;
+  }
+  .vcard h3{
+    font-size:19px;
+    color:var(--green-darker);
+    margin-bottom:12px;
+    font-weight:400;
+    position:relative;
+    z-index:1;
+  }
+  .vcard p{
+    font-size:14px;
+    color:#45544a;
+    position:relative;
+    z-index:1;
+  }
+  .vcard .chip{
+    display:inline-block;
+    font-size:11px;
+    background:var(--mustard);
+    color:#2b1d02;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:12px;
+    font-weight:700;
+  }
+
+  /* ===== SCHEDULE / phone strip ===== */
+  .flow{
+    background:var(--green-deep);
+    color:#F2EEDD;
+    position:relative;
+    overflow:hidden;
+  }
+  .flow::after{
+    content:"";
+    position:absolute;
+    bottom:-80px;right:-80px;
+    width:260px;height:260px;
+    border:2px dashed rgba(246,243,230,0.2);
+    border-radius:50%;
+  }
+  .flow .section-title,.flow .section-tag{color:#F2EEDD;}
+  .flow .section-tag{color:var(--mustard);}
+  .timeline{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+  }
+  .tl-item{
+    background:rgba(246,243,230,0.06);
+    border:1px solid rgba(246,243,230,0.18);
+    border-radius:12px;
+    padding:20px 16px;
+    position:relative;
+  }
+  .tl-item .day{
+    font-family:'Shippori Antique B1',sans-serif;
+    font-size:13px;
+    color:var(--mustard);
+    letter-spacing:.1em;
+    margin-bottom:8px;
+    display:block;
+  }
+  .tl-item p{
+    font-size:13px;
+    color:#D9E3DA;
+  }
+  .tiktok-note{
+    margin-top:50px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    background:rgba(246,243,230,0.07);
+    border-radius:14px;
+    padding:22px 26px;
+    flex-wrap:wrap;
+  }
+  .phone-frame{
+    flex:0 0 64px;
+    height:100px;
+    border-radius:12px;
+    background:linear-gradient(160deg, var(--pink), #9c2f4e);
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .phone-frame::before{
+    content:"";
+    width:0;height:0;
+    border-top:9px solid transparent;
+    border-bottom:9px solid transparent;
+    border-left:14px solid #F2EEDD;
+    margin-left:3px;
+  }
+  .tiktok-note p{
+    font-size:14px;
+    color:#E7EEE3;
+    flex:1 1 260px;
+  }
+
+  /* ===== CLOSING ===== */
+  .closing{
+    background:var(--paper);
+    text-align:center;
+    position:relative;
+  }
+  .closing::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--pink) 0 20px, var(--mustard) 20px 40px);
+  }
+  .closing h2{
+    font-size:clamp(24px,3.6vw,36px);
+    font-weight:400;
+    color:var(--green-darker);
+    margin-bottom:18px;
+  }
+  .closing p{
+    max-width:520px;
+    margin:0 auto 36px;
+    color:#44544a;
+    font-size:15px;
+  }
+  .cta-btn{
+    display:inline-block;
+    background:var(--green-deep);
+    color:#F6F3E6;
+    padding:18px 48px;
+    border-radius:999px;
+    font-size:16px;
+    letter-spacing:.06em;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow:0 14px 30px rgba(31,75,63,0.3);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .cta-btn:hover{
+    transform:translateY(-3px);
+    background:var(--green-darker);
+  }
+  .closing-foot{
+    margin-top:34px;
+    font-size:12px;
+    color:#8a978b;
+    letter-spacing:.08em;
+  }
+
+  footer{
+    background:var(--green-darker);
+    color:#9fb3a3;
+    text-align:center;
+    padding:26px 0;
+    font-size:12px;
+    letter-spacing:.1em;
+  }
+
+  @media (max-width:860px){
+    .understand-grid{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:1fr;}
+    .timeline{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .hero{padding:60px 0 40px;min-height:auto;}
+    .hero-inner{gap:34px;}
+    .badge-area{flex:0 0 auto;}
+    .label-badge{width:190px;height:190px;}
+    .hero-meta{gap:18px;}
+    .timeline{grid-template-columns:1fr 1fr;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <span class="kairos-tag">KAIROS からのご提案</span>
+      <h1>一つの商品を、<br>まっすぐ<span>棚</span>に並べる。</h1>
+      <p class="lead">
+        Shopifyという一枚の売場と、TikTok Shopという一本の導線。
+        欲張らず、まずは1商品を正しく届けるための設計を、Kairosがご用意します。
+      </p>
+      <div class="hero-meta">
+        <div><b>30,000〜50,000円</b>ご予算</div>
+        <div><b>最短1週間</b>制作期間目安</div>
+        <div><b>1商品 / 1ページ</b>構成</div>
+      </div>
+    </div>
+    <div class="badge-area">
+      <div class="label-badge">
+        <small>PROPOSAL LABEL</small>
+        <div class="num">01</div>
+        <div class="cap">FIRST PRODUCT<br>ON SHELF</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="understand">
+  <div class="wrap understand-grid">
+    <div>
+      <span class="section-tag">UNDERSTANDING</span>
+      <h2 class="section-title">「まず1商品で、確実に始めたい」<br>そのお気持ち、よく分かります。</h2>
+      <div class="quote-box">
+        <p>
+          大掛かりなECサイトではなく、まずは食品1商品をきちんと販売できる場所がほしい。
+          素材は揃っているから、技術的な土台づくりを任せたい。
+          そしてTikTok Shopという新しい売場にも、きちんと繋げておきたい——
+          そんな「小さく、でも確実に」という意図を汲んだご提案をいたします。
+        </p>
+      </div>
+    </div>
+    <div>
+      <ul class="points">
+        <li>商品写真・情報・文章はご用意済み＝構築に集中できる状態</li>
+        <li>既存テーマ活用の1ページ構成＝過不足のないシンプル設計</li>
+        <li>公開後の運営は貴社で実施＝引き渡し後も迷わない作りが必須</li>
+        <li>制作期間は1週間目安＝着手の早さと判断の速さが鍵</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="value">
+  <div class="wrap">
+    <span class="section-tag">WHAT KAIROS BRINGS</span>
+    <h2 class="section-title">Kairosがご提供できること</h2>
+    <div class="value-grid">
+      <div class="vcard">
+        <div class="vnum">01</div>
+        <span class="chip">SHOPIFY</span>
+        <h3>既存テーマを活かした1ページ構築</h3>
+        <p>ご用意いただく商品写真・情報・文章を元に、既存テーマの範囲内で過不足なく整えた1ページ構成のサイトを制作します。</p>
+      </div>
+      <div class="vcard">
+        <div class="vnum">02</div>
+        <span class="chip">SETTING</span>
+        <h3>決済・送料の基本設定</h3>
+        <p>決済手段・送料ルールなど、食品ECとして最低限かつ確実に必要な基本設定を漏れなく行います。</p>
+      </div>
+      <div class="vcard">
+        <div class="vnum">03</div>
+        <span class="chip">TIKTOK SHOP</span>
+        <h3>TikTok Shopとの初期連携</h3>
+        <p>ShopifyとTikTok Shopを接続し、新しい販売チャネルとしてすぐに動き出せる状態まで整えます。</p>
+      </div>
+      <div class="vcard">
+        <div class="vnum">04</div>
+        <span class="chip">HANDOVER</span>
+        <h3>運営を引き継ぎやすい設計</h3>
+        <p>公開後は貴社で運営される前提のため、管理画面の分かりやすさ・引き継ぎのしやすさを意識して構築します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="wrap">
+    <span class="section-tag">SCHEDULE IMAGE</span>
+    <h2 class="section-title">進め方（制作期間 目安1週間）</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="day">Day 1</span>
+        <p>着手・素材確認／構成の最終すり合わせ</p>
+      </div>
+      <div class="tl-item">
+        <span class="day">Day 2-3</span>
+        <p>Shopifyテーマ設定・ページ制作</p>
+      </div>
+      <div class="tl-item">
+        <span class="day">Day 4</span>
+        <p>決済・送料など基本設定</p>
+      </div>
+      <div class="tl-item">
+        <span class="day">Day 5</span>
+        <p>TikTok Shop 初期連携作業</p>
+      </div>
+      <div class="tl-item">
+        <span class="day">Day 6-7</span>
+        <p>動作確認・調整・納品</p>
+      </div>
+    </div>
+    <div class="tiktok-note">
+      <div class="phone-frame"></div>
+      <p>TikTok Shopとの連携は、単なる接続作業ではなく「公開後すぐに売場として機能するか」まで見据えて設定いたします。公開後は貴社での運営にスムーズに引き継げる状態でお渡しします。</p>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>まずは、1商品を正しく世に出すところから。</h2>
+    <p>
+      Shopify制作実績・TikTok Shop連携経験・着手可能日・お見積りなど、
+      ご応募にあたって伺いたい内容も含めて、まずはお気軽にご相談ください。
+    </p>
+    <a href="#" class="cta-btn">Kairosに相談してみる</a>
+    <div class="closing-foot">KAIROS — Web制作・システム開発チーム</div>
+  </div>
+</section>
+
+<footer>
+  © Kairos — Shopify × TikTok Shop ご提案ページ
+</footer>
+
+</body>
+</html>
